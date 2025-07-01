@@ -9,6 +9,24 @@
   --black-color: #0c0b0b;
   --gray-color: #ccc;
   --white-color: #f8f8f8;
+
+
+  --body-family: font-family: "Raleway", sans-serif;
+  --h1-family: "Merriweather", serif;
+  --h3-family: "Dancing Script", cursive;
+
+  --h1-size: 4.2rem;
+  --h2-size: 2.4rem;
+  --h3-size: 2.4rem;
+  --h4-size: 1.4rem;
+  --p-size: .9rem;
+  --nav-size: 1rem;
+  --offset: 10px;
+  --border-size: 2px;
+  --icon-size: 1.3rem;
+  --badge-size: .6rem;
+
+    
 }
 
 @theme inline {
@@ -28,5 +46,105 @@
 body {
   background: var(--white-color);
   color: var(--accent-color);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--body-family);
+}
+
+@layer base{
+  .sub-title{
+    font-family: var(--h3-family);
+    color: var(--primary-color);
+    text-transform: capitalize;
+  }
+
+  .hero-sub{
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-family: var(--h1-family);
+    
+    color: var(--black-color); 
+    
+    align-items: center; 
+    text-transform: capitalize;
+  }
+
+  .hero-title{
+    color: var(--h1-size);
+  }
+
+  .featured{
+    @apply flex flex-col mb-10
+  }
+
+  .featured-img{
+    @apply w-[100px] h-auto 
+  }
+
+  .button { 
+    display: block;
+    position: relative;
+    padding: 1.5em 3em;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 var(--border-size) currentcolor;
+    transition: background 0.8s ease;
+}
+.button:hover {
+    background: rgba(100, 0, 0, 0.03);
+}
+.button__horizontal, .button__vertical {
+    position: absolute;
+    top: var(--horizontal-offset, 0);
+    right: var(--vertical-offset, 0);
+    bottom: var(--horizontal-offset, 0);
+    left: var(--vertical-offset, 0);
+    transition: transform 0.8s ease;
+    will-change: transform;
+}
+.button__horizontal::before, .button__vertical::before {
+    content: "";
+    position: absolute;
+    border: inherit;
+}
+.button__horizontal {
+    --vertical-offset: calc(var(--offset) * -1);
+    border-top: var(--border-size) solid currentcolor;
+    border-bottom: var(--border-size) solid currentcolor;
+}
+.button__horizontal::before {
+    top: calc(var(--vertical-offset) - var(--border-size));
+    bottom: calc(var(--vertical-offset) - var(--border-size));
+    left: calc(var(--vertical-offset) * -1);
+    right: calc(var(--vertical-offset) * -1);
+}
+.button:hover .button__horizontal {
+    transform: scaleX(0);
+}
+.button__vertical {
+    --horizontal-offset: calc(var(--offset) * -1);
+    border-left: var(--border-size) solid currentcolor;
+    border-right: var(--border-size) solid currentcolor;
+}
+.button__vertical::before {
+    top: calc(var(--horizontal-offset) * -1);
+    bottom: calc(var(--horizontal-offset) * -1);
+    left: calc(var(--horizontal-offset) - var(--border-size));
+    right: calc(var(--horizontal-offset) - var(--border-size));
+}
+.button:hover .button__vertical {
+    transform: scaleY(0);
+}
+
+
 }
